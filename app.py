@@ -211,11 +211,18 @@ def run():
     the_hex_set = the_set[0]
     the_tri_set = the_set[1]
     print_results(the_hex_set, the_tri_set)
+    k_sorted_hex_set = k_sort(the_hex_set)
+    k_sorted_tri_set = k_sort(the_tri_set)
+    create_csv(k_sorted_hex_set, 'hexagrams')
+    create_csv(k_sorted_tri_set, 'trigrams')
 
 
-def create_csv(values):
-    # placeholder function
-    return values
+def create_csv(k_sorted_set, filename):
+    with open(f'{filename}.csv', mode='w') as csv_file:
+        fieldnames = list(k_sorted_set.keys())
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow(k_sorted_set)
 
 
 run()

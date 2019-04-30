@@ -28,13 +28,6 @@ def hexagram():
     return hexagram_array
 
 
-def array_to_string(hexagram_array):
-    hexagram_string = ''
-    for trigram in hexagram_array:
-        hexagram_string += ''.join(str(trigram))
-    return hexagram_string
-
-
 def find_trigram_number(trigram_bin):
     trigrams = {
         "000": 8, "001": 7,
@@ -96,45 +89,6 @@ def find_trigram_meaning(number):
 def make_cord_array(low_num, up_num):
     this_array = [low_num, up_num]
     return this_array
-
-
-def find_glyph(glyph):
-    i_ching = {
-        "111111": 1, "000000": 2,
-        "100010": 3, "010001": 4,
-        "111010": 5, "010111": 6,
-        "010000": 7, "000010": 8,
-        "111011": 9, "110111": 10,
-        "111000": 11, "000111": 12,
-        "101111": 13, "111101": 14,
-        "001000": 15, "000100": 16,
-        "100110": 17, "011001": 18,
-        "110000": 19, "000011": 20,
-        "100101": 21, "101001": 22,
-        "000001": 23, "100000": 24,
-        "100111": 25, "111001": 26,
-        "100001": 27, "011110": 28,
-        "010010": 29, "101101": 30,
-        "001110": 31, "011100": 32,
-        "001111": 33, "111100": 34,
-        "000101": 35, "101000": 36,
-        "101011": 37, "110101": 38,
-        "001010": 39, "010100": 40,
-        "110001": 41, "100011": 42,
-        "111110": 43, "011111": 44,
-        "000110": 45, "011000": 46,
-        "010110": 47, "011010": 48,
-        "101110": 49, "011101": 50,
-        "100100": 51, "001001": 52,
-        "001011": 53, "110100": 54,
-        "101100": 55, "001101": 56,
-        "011011": 57, "110110": 58,
-        "010011": 59, "110010": 60,
-        "001100": 61, "110011": 62,
-        "101010": 63, "010101": 64,
-    }
-    glyph_number = i_ching[glyph]
-    return glyph_number
 
 
 def find_meaning(glyph_number):
@@ -207,21 +161,20 @@ def find_meaning(glyph_number):
     return meanings[glyph_number]
 
 
-def k_sort(d):
-    return [(k, d[k]) for k in sorted(d.keys())]
-
-
 def iterate():
-    # table = generate_table()
+    table = generate_table()
     i = 1
     all_tri = []
     all_hex = []
     while i <= 262144:
         new_hex = hexagram()
-        all_tri.append(find_trigram_number(new_hex[0]))
-        all_tri.append(find_trigram_number(new_hex[1]))
-        to_string = array_to_string(new_hex)
-        all_hex.append(find_glyph(to_string))
+        low_num = find_trigram_number(new_hex[0])
+        up_num = find_trigram_number(new_hex[1])
+        all_tri.append(low_num)
+        all_tri.append(up_num)
+        cords = make_cord_array(low_num, up_num)
+        fu_xi_num = lookup_table(table, cords)
+        all_hex.append(fu_xi_num)
         i += 1
     counted_hex = Counter(all_hex)
     counted_tri = Counter(all_tri)
@@ -229,11 +182,11 @@ def iterate():
 
 
 def print_results(counted_hex, counted_tri):
-    most_common_hex = counted_hex.most_common(3)
-    most_common_tri = counted_tri.most_common(3)
-    first_place_hex = most_common_hex[0][0]
+    most_common_hex = counted_hex.most_common(2)
+    most_common_tri = counted_tri.most_common(2)
+    first_place_hex = transform_king_wen(most_common_hex[0][0])
     times_first_hex = most_common_hex[0][1]
-    second_place_hex = most_common_hex[1][0]
+    second_place_hex = transform_king_wen(most_common_hex[1][0])
     times_second_hex = most_common_hex[1][1]
     first_place_tri = most_common_tri[0][0]
     times_first_tri = most_common_tri[0][1]

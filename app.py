@@ -86,12 +86,12 @@ def find_trigram_meaning(number):
     return trigram_meaning
 
 
-def make_cord_array(low_num, up_num):
-    this_array = [low_num, up_num]
+def make_cord_array(low_tri_num, up_tri_num):
+    this_array = [low_tri_num, up_tri_num]
     return this_array
 
 
-def find_meaning(glyph_number):
+def find_king_wen_meaning(glyph_number):
     meanings = {
         1: "䷀ Creative Heaven",
         2: "䷁ Receptive Earth",
@@ -168,11 +168,11 @@ def iterate():
     all_hex = []
     while i <= 262144:
         new_hex = hexagram()
-        low_num = find_trigram_number(new_hex[0])
-        up_num = find_trigram_number(new_hex[1])
-        all_tri.append(low_num)
-        all_tri.append(up_num)
-        cords = make_cord_array(low_num, up_num)
+        low_tri_num = find_trigram_number(new_hex[0])
+        up_tri_num = find_trigram_number(new_hex[1])
+        all_tri.append(low_tri_num)
+        all_tri.append(up_tri_num)
+        cords = make_cord_array(low_tri_num, up_tri_num)
         fu_xi_num = lookup_table(table, cords)
         all_hex.append(fu_xi_num)
         i += 1
@@ -181,21 +181,25 @@ def iterate():
     return counted_hex, counted_tri
 
 
+def k_sort(d):
+    return {k: d[k] for k in sorted(d.keys())}
+
+
 def print_results(counted_hex, counted_tri):
     most_common_hex = counted_hex.most_common(2)
     most_common_tri = counted_tri.most_common(2)
-    first_place_hex = transform_king_wen(most_common_hex[0][0])
+    first_place_king_wen_hex = transform_king_wen(most_common_hex[0][0])
     times_first_hex = most_common_hex[0][1]
-    second_place_hex = transform_king_wen(most_common_hex[1][0])
+    second_place_king_wen_hex = transform_king_wen(most_common_hex[1][0])
     times_second_hex = most_common_hex[1][1]
     first_place_tri = most_common_tri[0][0]
     times_first_tri = most_common_tri[0][1]
     second_place_tri = most_common_tri[1][0]
     times_second_tri = most_common_tri[1][1]
-    print(f'\nHexagram {first_place_hex} was found {times_first_hex} times')
-    print(find_meaning(first_place_hex))
-    print(f'\nHexagram {second_place_hex} was found {times_second_hex} times')
-    print(find_meaning(second_place_hex))
+    print(f'\nHexagram {first_place_king_wen_hex} was found {times_first_hex} times')
+    print(find_king_wen_meaning(first_place_king_wen_hex))
+    print(f'\nHexagram {second_place_king_wen_hex} was found {times_second_hex} times')
+    print(find_king_wen_meaning(second_place_king_wen_hex))
     print(f'\nTrigram {first_place_tri} was found {times_first_tri} times')
     print(find_trigram_meaning(first_place_tri))
     print(f'\nTrigram {second_place_tri} was found {times_second_tri} times')

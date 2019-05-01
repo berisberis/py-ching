@@ -139,13 +139,12 @@ def find_king_wen_meaning(glyph_number):
 def iterate(iterations):
     table = generate_table()
     i = 1
-    all_bin = []
-    all_tri = []
     all_hex = []
+    all_tri = []
+    all_bin = []
     while i <= iterations:
         new_hex = hexagram()
-        low_bins = new_hex[0]
-        up_bins = new_hex[1]
+        low_bins, up_bins = new_hex
         for low_bin in low_bins:
             all_bin.append(low_bin)
         for up_bin in up_bins:
@@ -158,9 +157,9 @@ def iterate(iterations):
         fu_xi_num = lookup_table(table, cords)
         all_hex.append(fu_xi_num)
         i += 1
-    counted_bin = Counter(all_bin)
     counted_hex = Counter(all_hex)
     counted_tri = Counter(all_tri)
+    counted_bin = Counter(all_bin)
     return counted_hex, counted_tri, counted_bin
 
 
@@ -172,37 +171,30 @@ def print_results(counted_hex, counted_tri, counted_bin):
     most_common_hex = counted_hex.most_common(2)
     most_common_tri = counted_tri.most_common(2)
     most_common_bin = counted_bin.most_common(2)
-    first_place_king_wen_hex = transform_king_wen(most_common_hex[0][0])
-    times_first_hex = most_common_hex[0][1]
-    second_place_king_wen_hex = transform_king_wen(most_common_hex[1][0])
-    times_second_hex = most_common_hex[1][1]
-    first_place_tri = most_common_tri[0][0]
-    times_first_tri = most_common_tri[0][1]
-    second_place_tri = most_common_tri[1][0]
-    times_second_tri = most_common_tri[1][1]
-    first_place_bin = most_common_bin[0][0]
-    times_first_bin = most_common_bin[0][1]
-    second_place_bin = most_common_bin[1][0]
-    times_second_bin = most_common_bin[1][1]
-    print(f'\nHexagram {first_place_king_wen_hex} was found {times_first_hex} times')
-    print(find_king_wen_meaning(first_place_king_wen_hex))
-    print(f'\nHexagram {second_place_king_wen_hex} was found {times_second_hex} times')
-    print(find_king_wen_meaning(second_place_king_wen_hex))
-    print(f'\nTrigram {first_place_tri} was found {times_first_tri} times')
-    print(find_trigram_meaning(first_place_tri))
-    print(f'\nTrigram {second_place_tri} was found {times_second_tri} times')
-    print(find_trigram_meaning(second_place_tri))
-    print(f'\nBinary {first_place_bin} was found {times_first_bin} times')
-    print(f'Binary {second_place_bin} was found {times_second_bin} times')
+
+    (hex_first_place, hex_first_times), (hex_second_place, hex_second_times) = most_common_hex
+    (tri_first_place, tri_first_times), (tri_second_place, tri_second_times) = most_common_tri
+    (bin_first_place, bin_first_times), (bin_second_place, bin_second_times) = most_common_bin
+
+    print(f'\nHexagram {transform_king_wen(hex_first_place)} was found {hex_first_times} times')
+    print(find_king_wen_meaning(hex_first_place))
+    print(f'\nHexagram {transform_king_wen(hex_second_place)} was found {hex_second_times} times')
+    print(find_king_wen_meaning(hex_second_place))
+
+    print(f'\nTrigram {tri_first_place} was found {tri_first_times} times')
+    print(find_trigram_meaning(tri_first_place))
+    print(f'\nTrigram {tri_second_place} was found {tri_second_times} times')
+    print(find_trigram_meaning(tri_second_place))
+
+    print(f'\nBinary {bin_first_place} was found {bin_first_times} times')
+    print(f'Binary {bin_second_place} was found {bin_second_times} times')
 
 
 def run(iterations, sets):
 
     def iterate_and_sort():
         the_set = iterate(iterations)
-        the_hex_set = the_set[0]
-        the_tri_set = the_set[1]
-        the_bin_set = the_set[2]
+        the_hex_set, the_tri_set, the_bin_set = the_set
         print_results(the_hex_set, the_tri_set, the_bin_set)
         k_sorted_hex_set = k_sort(the_hex_set)
         k_sorted_tri_set = k_sort(the_tri_set)
@@ -210,10 +202,10 @@ def run(iterations, sets):
         return k_sorted_hex_set, k_sorted_tri_set, k_sorted_bin_set
 
     def sets_to_csv(mode):
-        sorted_sets = iterate_and_sort()
-        to_csv(sorted_sets[0], 'hexagrams', mode)
-        to_csv(sorted_sets[1], 'trigrams', mode)
-        to_csv(sorted_sets[2], 'binaries', mode)
+        hex_sorted_set, tri_sorted_set, bin_sorted_set = iterate_and_sort()
+        to_csv(hex_sorted_set, 'hexagrams', mode)
+        to_csv(tri_sorted_set, 'trigrams', mode)
+        to_csv(bin_sorted_set, 'binaries', mode)
 
     sets_to_csv('w')
     r = 1

@@ -10,15 +10,15 @@ def hexagram():
 
     def trigram():
         t = 1
-        trigram_string = []
+        trigram_array = []
         while t <= 3:
             int_rand = secrets.randbelow(1000)
             if int_rand > 500:
-                trigram_string.append(1)
+                trigram_array.append(1)
             else:
-                trigram_string.append(0)
+                trigram_array.append(0)
             t += 1
-        return trigram_string
+        return trigram_array
 
     h = 1
     hexagram_array = []
@@ -28,11 +28,11 @@ def hexagram():
     return hexagram_array
 
 
-def array_to_string(hexagram_array):
-    hexagram_string = ''
-    for trigram in hexagram_array:
-        hexagram_string += ''.join(str(trigram))
-    return hexagram_string
+def array_to_string(array):
+    string = ''
+    for item in array:
+        string += ''.join(str(item))
+    return string
 
 
 def find_trigram_number(trigram_bin):

@@ -168,13 +168,13 @@ def find_king_wen_meaning(glyph_number):
     return meanings[glyph_number]
 
 
-def iterate():
+def iterate(iterations):
     table = generate_table()
     i = 1
     all_bin = []
     all_tri = []
     all_hex = []
-    while i <= 262144:
+    while i <= iterations:
         new_hex = hexagram()
         low_bins = new_hex[0]
         up_bins = new_hex[1]
@@ -228,26 +228,38 @@ def print_results(counted_hex, counted_tri, counted_bin):
     print(f'Binary {second_place_bin} was found {times_second_bin} times')
 
 
-def run():
-    the_set = iterate()
-    the_hex_set = the_set[0]
-    the_tri_set = the_set[1]
-    the_bin_set = the_set[2]
-    print_results(the_hex_set, the_tri_set, the_bin_set)
-    k_sorted_hex_set = k_sort(the_hex_set)
-    k_sorted_tri_set = k_sort(the_tri_set)
-    k_sorted_bin_set = k_sort(the_bin_set)
-    create_csv(k_sorted_hex_set, 'hexagrams')
-    create_csv(k_sorted_tri_set, 'trigrams')
-    create_csv(k_sorted_bin_set, 'binaries')
+def run(iterations, sets):
+
+    def iterate_and_sort():
+        the_set = iterate(iterations)
+        the_hex_set = the_set[0]
+        the_tri_set = the_set[1]
+        the_bin_set = the_set[2]
+        print_results(the_hex_set, the_tri_set, the_bin_set)
+        k_sorted_hex_set = k_sort(the_hex_set)
+        k_sorted_tri_set = k_sort(the_tri_set)
+        k_sorted_bin_set = k_sort(the_bin_set)
+        return k_sorted_hex_set, k_sorted_tri_set, k_sorted_bin_set
+
+    def sets_to_csv(mode):
+        sorted_sets = iterate_and_sort()
+        to_csv(sorted_sets[0], 'hexagrams', mode)
+        to_csv(sorted_sets[1], 'trigrams', mode)
+        to_csv(sorted_sets[2], 'binaries', mode)
+
+    sets_to_csv('w')
+    r = 1
+    while r < sets:
+        sets_to_csv('a')
+        r += 1
 
 
-def create_csv(k_sorted_set, filename):
-    with open(f'{filename}.csv', mode='w') as csv_file:
+def to_csv(k_sorted_set, filename, mode):
+    with open(f'{filename}.csv', mode=mode) as csv_file:
         fieldnames = list(k_sorted_set.keys())
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
+        writer.writeheader() if mode == 'w' else None
         writer.writerow(k_sorted_set)
 
 
-run()
+run(32768, 8)

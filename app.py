@@ -10,13 +10,13 @@ def hexagram():
 
     def trigram():
         t = 1
-        trigram_string = ''
+        trigram_string = []
         while t <= 3:
             int_rand = secrets.randbelow(1000)
             if int_rand > 500:
-                trigram_string += str(1)
+                trigram_string.append(1)
             else:
-                trigram_string += str(0)
+                trigram_string.append(0)
             t += 1
         return trigram_string
 
@@ -26,6 +26,13 @@ def hexagram():
         hexagram_array.append(trigram())
         h += 1
     return hexagram_array
+
+
+def array_to_string(hexagram_array):
+    hexagram_string = ''
+    for trigram in hexagram_array:
+        hexagram_string += ''.join(str(trigram))
+    return hexagram_string
 
 
 def find_trigram_number(trigram_bin):
@@ -164,30 +171,39 @@ def find_king_wen_meaning(glyph_number):
 def iterate():
     table = generate_table()
     i = 1
+    all_bin = []
     all_tri = []
     all_hex = []
     while i <= 262144:
         new_hex = hexagram()
-        low_tri_num = find_trigram_number(new_hex[0])
-        up_tri_num = find_trigram_number(new_hex[1])
+        low_bins = new_hex[0]
+        up_bins = new_hex[1]
+        for low_bin in low_bins:
+            all_bin.append(low_bin)
+        for up_bin in up_bins:
+            all_bin.append(up_bin)
+        low_tri_num = find_trigram_number(array_to_string(new_hex[0]))
+        up_tri_num = find_trigram_number(array_to_string(new_hex[1]))
         all_tri.append(low_tri_num)
         all_tri.append(up_tri_num)
         cords = make_cord_array(low_tri_num, up_tri_num)
         fu_xi_num = lookup_table(table, cords)
         all_hex.append(fu_xi_num)
         i += 1
+    counted_bin = Counter(all_bin)
     counted_hex = Counter(all_hex)
     counted_tri = Counter(all_tri)
-    return counted_hex, counted_tri
+    return counted_hex, counted_tri, counted_bin
 
 
 def k_sort(d):
     return {k: d[k] for k in sorted(d.keys())}
 
 
-def print_results(counted_hex, counted_tri):
+def print_results(counted_hex, counted_tri, counted_bin):
     most_common_hex = counted_hex.most_common(2)
     most_common_tri = counted_tri.most_common(2)
+    most_common_bin = counted_bin.most_common(2)
     first_place_king_wen_hex = transform_king_wen(most_common_hex[0][0])
     times_first_hex = most_common_hex[0][1]
     second_place_king_wen_hex = transform_king_wen(most_common_hex[1][0])
@@ -196,6 +212,10 @@ def print_results(counted_hex, counted_tri):
     times_first_tri = most_common_tri[0][1]
     second_place_tri = most_common_tri[1][0]
     times_second_tri = most_common_tri[1][1]
+    first_place_bin = most_common_bin[0][0]
+    times_first_bin = most_common_bin[0][1]
+    second_place_bin = most_common_bin[1][0]
+    times_second_bin = most_common_bin[1][1]
     print(f'\nHexagram {first_place_king_wen_hex} was found {times_first_hex} times')
     print(find_king_wen_meaning(first_place_king_wen_hex))
     print(f'\nHexagram {second_place_king_wen_hex} was found {times_second_hex} times')
@@ -204,17 +224,22 @@ def print_results(counted_hex, counted_tri):
     print(find_trigram_meaning(first_place_tri))
     print(f'\nTrigram {second_place_tri} was found {times_second_tri} times')
     print(find_trigram_meaning(second_place_tri))
+    print(f'\nBinary {first_place_bin} was found {times_first_bin} times')
+    print(f'Binary {second_place_bin} was found {times_second_bin} times')
 
 
 def run():
     the_set = iterate()
     the_hex_set = the_set[0]
     the_tri_set = the_set[1]
-    print_results(the_hex_set, the_tri_set)
+    the_bin_set = the_set[2]
+    print_results(the_hex_set, the_tri_set, the_bin_set)
     k_sorted_hex_set = k_sort(the_hex_set)
     k_sorted_tri_set = k_sort(the_tri_set)
+    k_sorted_bin_set = k_sort(the_bin_set)
     create_csv(k_sorted_hex_set, 'hexagrams')
     create_csv(k_sorted_tri_set, 'trigrams')
+    create_csv(k_sorted_bin_set, 'binaries')
 
 
 def create_csv(k_sorted_set, filename):

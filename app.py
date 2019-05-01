@@ -182,8 +182,8 @@ def iterate():
             all_bin.append(low_bin)
         for up_bin in up_bins:
             all_bin.append(up_bin)
-        low_tri_num = find_trigram_number(array_to_string(new_hex[0]))
-        up_tri_num = find_trigram_number(array_to_string(new_hex[1]))
+        low_tri_num = find_trigram_number(array_to_string(low_bins))
+        up_tri_num = find_trigram_number(array_to_string(up_bins))
         all_tri.append(low_tri_num)
         all_tri.append(up_tri_num)
         cords = make_cord_array(low_tri_num, up_tri_num)

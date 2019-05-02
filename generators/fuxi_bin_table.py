@@ -12,7 +12,6 @@ class FuXiSequence:
                 table.append([low, up])
         return table
 
-
     @staticmethod
     def lookup_table(table, cords):
         glyph_num = table.index(cords)

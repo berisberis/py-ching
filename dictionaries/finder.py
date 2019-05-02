@@ -92,8 +92,4 @@ class Finder:
             61: "䷼ Inner Truth", 62: "䷽ Small Preponderance",
             63: "䷾ After Completion", 64: "䷿ Before Completion",
         }
-        try:
-            return meanings[glyph_number]
-        except KeyError:
-            print(f'\n\nHexagram 0 does not exist!!!\n\n')
-
+        return meanings[glyph_number]

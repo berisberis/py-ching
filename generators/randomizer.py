@@ -10,8 +10,8 @@ class Hexagram:
             t = 1
             trigram_array = []
             while t <= 3:
-                int_rand = secrets.randbelow(1000)
-                if int_rand > 500:
+                int_rand = secrets.randbelow(2)
+                if int_rand == 1:
                     trigram_array.append(1)
                 else:
                     trigram_array.append(0)

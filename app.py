@@ -11,10 +11,8 @@ class IChing:
     @staticmethod
     def run(iterations, sets):
         CsvMake.sets_to_csv('w', Arrays.sort_the_sets(Results.print(Iteration.iterate(iterations))))
-        r = 1
-        while r < sets:
+        for r in range(sets-1):
             CsvMake.sets_to_csv('a', Arrays.sort_the_sets(Results.print(Iteration.iterate(iterations))))
-            r += 1
 
 
 IChing.run(iterations=4096, sets=4)

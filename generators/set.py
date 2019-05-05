@@ -10,11 +10,10 @@ class Iteration:
     @staticmethod
     def iterate(iterations):
         table = FuXiSequence.generate_table()
-        i = 1
         all_hex = []
         all_tri = []
         all_bin = []
-        while i <= iterations:
+        for i in range(iterations):
             new_hex = Hexagram.create()
             low_bins, up_bins = new_hex
             for low_bin in low_bins:
@@ -28,7 +27,6 @@ class Iteration:
             cords = Arrays.make_cord_array(low_tri_num, up_tri_num)
             fu_xi_num = FuXiSequence.lookup_table(table, cords)
             all_hex.append(fu_xi_num)
-            i += 1
         counted_hex = Counter(all_hex)
         counted_tri = Counter(all_tri)
         counted_bin = Counter(all_bin)

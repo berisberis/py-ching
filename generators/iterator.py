@@ -4,6 +4,7 @@ import secrets
 
 
 class Iteration:
+    table = sorted([[a, b] for a in range(1, 9) for b in range(1, 9)], reverse=True)
 
     @staticmethod
     def create_hexagram():
@@ -24,7 +25,6 @@ class Iteration:
         return hexagram_array
 
     def iterate(self, iterations):
-        table = self.generate_table()
         all_hex = []
         all_tri = []
         all_bin = []
@@ -40,22 +40,9 @@ class Iteration:
             all_tri.append(low_tri_num)
             all_tri.append(up_tri_num)
             coords = [low_tri_num, up_tri_num]
-            fu_xi_num = table.index(coords)
+            fu_xi_num = self.table.index(coords)
             all_hex.append(fu_xi_num)
         counted_hex = Counter(all_hex)
         counted_tri = Counter(all_tri)
         counted_bin = Counter(all_bin)
         return counted_hex, counted_tri, counted_bin
-
-    @staticmethod
-    def generate_table():
-        table = []
-        low = 9
-        while low > 1:
-            low -= 1
-            up = 9
-            while up > 1:
-                up -= 1
-                table.append([low, up])
-        return table
-

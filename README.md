@@ -43,6 +43,8 @@ Even the (cryptographically secure) Yarrow algorithm used today in iOS and MacOS
 >The Yarrow algorithm is a family of cryptographic pseudorandom number generators (PRNG). The name Yarrow alludes to the use of the yarrow plant in the random generating process of I Ching divination. Since the Xia dynasty (c. 2070 to c. 1600 BCE), Chinese have used yarrow stalks for divination. Fortunetellers divide a set of 50 yarrow stalks into piles and use modulo arithmetic recursively to generate two bits of random information that have a non-uniform distribution.
 [Wikipedia](https://en.wikipedia.org/wiki/Yarrow_algorithm)
 
-This project uses the `secret` python module to achieve maximum randomness, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
+This project uses the `secrets` python module to achieve maximum randomness, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
 
 ## This is a work in progress
+
+![Quantum I Ching](https://fractaluniverse.files.wordpress.com/2019/03/imagen-1481.jpg)

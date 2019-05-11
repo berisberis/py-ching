@@ -1,6 +1,7 @@
 # Py-Ching
 Random i-ching trigram generator that iterates and graphs results
 
+This project uses the `secrets` python module to achieve maximum randomness, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
 
 # About the I-ching
 The I Ching is the oldest binary system developed by the chinese around 1000-750BC.
@@ -46,7 +47,16 @@ Even the (cryptographically secure) Yarrow algorithm used today in iOS and MacOS
 >The Yarrow algorithm is a family of cryptographic pseudorandom number generators (PRNG). The name Yarrow alludes to the use of the yarrow plant in the random generating process of I Ching divination. Since the Xia dynasty (c. 2070 to c. 1600 BCE), Chinese have used yarrow stalks for divination. Fortunetellers divide a set of 50 yarrow stalks into piles and use modulo arithmetic recursively to generate two bits of random information that have a non-uniform distribution.
 [Wikipedia](https://en.wikipedia.org/wiki/Yarrow_algorithm)
 
-This project uses the `secrets` python module to achieve maximum randomness, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
+# Synchronicity and quantum mechanics
+
+Derived from Carl Jung's study of the I Ching he developed a theory called synchronicity that states:
+> Meaningful connections in the world manifest through coincidence with no apparent causal link. What he referred to as “acausal connecting principle”. Proposing it as a functional explanation for how the I-Ching worked, although he was never clear about how synchronicity worked.
+> Jung influenced one philosophical interpretation (not the science) of quantum physics with the concept of synchronicity regarding some events as non-causal. That idea influenced the physicist Wolfgang Pauli (with whom, via a letter correspondence, he developed the notion of unus mundus in connection with the notion of non-locality AKA entanglement) and some other physicists.
+[Wikipedia](https://en.wikipedia.org/wiki/Carl_Jung#Interpretation_of_quantum_mechanics)
+
+> According to a certain view, synchronicity serves as a way of making sense of or describing some aspects of quantum mechanics. It argues that quantum experiments demonstrate that, at least in the microworld of subatomic particles, there is an instantaneous connection between particles no matter how far away they are from one another. Known as quantum non-locality or entanglement, the proponents of this view argue that this points to a unified field that precedes physical reality. As with archetypal reasoning, the proponents argue that two events can correspond to each other (e.g. particle with particle, or person with person) in a meaningful way.
+[Wikipedia](https://en.wikipedia.org/wiki/Synchronicity#Quantum_Physics)
+
 
 ## This is a work in progress
 

@@ -28,6 +28,9 @@ The I-Ching also presents a binary fractal pattern that increases one dimension 
 
 ![Iching fractal pattern](https://fractaluniverse.files.wordpress.com/2019/02/cache_897298771.png)
 
+Gottfried Leibniz was inspired by the I Ching when he refined the binary numbering system in his 1703 Article called "Explanation of Binary Arithmetic". [Wikipedia on Leibniz and the I Ching](https://en.wikipedia.org/wiki/Binary_number#Leibniz_and_the_I_Ching)
+
+![Binary counter](https://fractaluniverse.files.wordpress.com/2019/05/binary_counter.gif)
 
 # About Randomness
 > Several computational methods for pseudo-random number generation exist. All fall short of the goal of true randomness, although they may meet, with varying success, some of the statistical tests for randomness intended to measure how unpredictable their results are (that is, to what degree their patterns are discernible). This generally makes them unusable for applications such as cryptography. However, carefully designed cryptographically secure pseudo-random number generators (CSPRNG) also exist, with special features specifically designed for use in cryptography.

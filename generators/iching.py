@@ -4,6 +4,10 @@ import secrets
 
 
 class Iteration:
+
+    def __init__(self, iterations):
+        self.iterations = iterations
+
     table = sorted([[a, b] for a in range(1, 9) for b in range(1, 9)], reverse=True)
 
     @staticmethod
@@ -24,11 +28,11 @@ class Iteration:
             hexagram_array.append(cls.trigram())
         return hexagram_array
 
-    def iterate(self, iterations):
+    def iterate(self):
         all_hex = []
         all_tri = []
         all_bin = []
-        for i in range(iterations):
+        for i in range(self.iterations):
             new_hex = self.create_hexagram()
             low_bins, up_bins = new_hex
             for low_bin in low_bins:

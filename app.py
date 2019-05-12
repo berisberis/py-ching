@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from generators.iterator import Iteration
+from generators.iching import Iteration
 from helpers.terminal import Results
 from helpers.files import CsvMake
 
 
-class IChing:
+class PyChing:
 
     def __init__(self, iterations, sets):
         self.iterations = iterations
@@ -22,13 +22,13 @@ class IChing:
         return self.all_the_sets
 
     def create_set(self, mode):
-        iteration = Iteration()
-        counted_iteration = iteration.iterate(self.iterations)
+        iteration = Iteration(self.iterations)
+        counted_iteration = iteration.iterate()
         results = Results(counted_iteration)
         results.print_results()
         sorted_sets = self.sort_the_sets(counted_iteration)
-        make_csv = CsvMake()
-        this_set = make_csv.sets_to_csv(mode, sorted_sets)
+        make_csv = CsvMake(sorted_sets)
+        this_set = make_csv.sets_to_csv(mode)
         return this_set
 
     @staticmethod
@@ -44,5 +44,5 @@ class IChing:
         return k_sorted_hex_set, k_sorted_tri_set, k_sorted_bin_set
 
 
-iching = IChing(iterations=4096, sets=8)
-iching.run()
+experiment = PyChing(iterations=4096, sets=8)
+experiment.run()

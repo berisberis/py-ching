@@ -4,12 +4,14 @@ import os
 
 class CsvMake:
 
+    def __init__(self, sorted_sets):
+        self.sorted_sets = sorted_sets
+
     file_names = ['hexagrams', 'trigrams', 'binaries']
 
-    def sets_to_csv(self, mode, sorted_sets):
-        for idx, one_set in enumerate(sorted_sets):
+    def sets_to_csv(self, mode):
+        for idx, one_set in enumerate(self.sorted_sets):
             self.to_csv(one_set, self.file_names[idx], mode)
-        return sorted_sets
 
     @staticmethod
     def to_csv(k_sorted_set, filename, mode):

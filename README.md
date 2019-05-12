@@ -49,7 +49,7 @@ Even the (cryptographically secure) Yarrow algorithm used today in iOS and MacOS
 
 # Synchronicity and quantum mechanics
 
-Derived from Carl Jung's study of the I Ching he developed a theory called synchronicity that states:
+Derived from psychologist Carl Jung's study of the I Ching he developed a concept called synchronicity that holds:
 > Meaningful connections in the world manifest through coincidence with no apparent causal link. What he referred to as “acausal connecting principle”. Proposing it as a functional explanation for how the I-Ching worked, although he was never clear about how synchronicity worked.
 > Jung influenced one philosophical interpretation (not the science) of quantum physics with the concept of synchronicity regarding some events as non-causal. That idea influenced the physicist Wolfgang Pauli (with whom, via a letter correspondence, he developed the notion of unus mundus in connection with the notion of non-locality AKA entanglement) and some other physicists.
 [Wikipedia](https://en.wikipedia.org/wiki/Carl_Jung#Interpretation_of_quantum_mechanics)

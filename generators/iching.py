@@ -21,7 +21,7 @@ class Hexagram:
         hexagram_array = []
         for h in range(2):
             hexagram_array.append(cls.trigram())
-        return hexagram_array
+        return tuple(hexagram_array)
 
 
 class IteratedSet:
@@ -29,7 +29,7 @@ class IteratedSet:
     def __init__(self, iterations):
         self.iterations = iterations
 
-    table = sorted([[a, b] for a in range(1, 9) for b in range(1, 9)], reverse=True)
+    fu_xi_table = sorted([(a, b) for a in range(1, 9) for b in range(1, 9)], reverse=True)
 
     def create_counted_set(self):
         all_hex = []
@@ -46,8 +46,8 @@ class IteratedSet:
             up_tri_num = finder.find_trigram_number(up_bins)
             all_tri.append(low_tri_num)
             all_tri.append(up_tri_num)
-            coords = [low_tri_num, up_tri_num]
-            fu_xi_num = self.table.index(coords)
+            coords = (low_tri_num, up_tri_num)
+            fu_xi_num = self.fu_xi_table.index(coords)
             all_hex.append(fu_xi_num)
         counted_hex = Counter(all_hex)
         counted_tri = Counter(all_tri)

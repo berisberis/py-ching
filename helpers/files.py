@@ -10,15 +10,15 @@ class CsvMake:
     file_names = ['hexagrams', 'trigrams', 'binaries']
 
     def sets_to_csv(self, mode):
-        for idx, one_set in enumerate(self.sorted_sets):
-            self.to_csv(one_set, self.file_names[idx], mode)
+        for key, one_set in enumerate(self.sorted_sets):
+            self.write_to_csv(one_set, self.file_names[key], mode)
 
     @staticmethod
-    def to_csv(k_sorted_set, filename, mode):
+    def write_to_csv(one_set, filename, mode):
         if not os.path.exists('csv'):
             os.mkdir('csv')
         with open(f'csv/{filename}.csv', mode=mode) as csv_file:
-            fieldnames = list(k_sorted_set.keys())
+            fieldnames = list(one_set.keys())
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader() if mode == 'w' else None
-            writer.writerow(k_sorted_set)
+            writer.writerow(one_set)

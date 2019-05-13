@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from generators.iching import Iteration
+from generators.iching import IteratedSet
 from helpers.terminal import Results
 from helpers.files import CsvMake
 
@@ -22,26 +22,31 @@ class PyChing:
         return self.all_the_sets
 
     def create_set(self, mode):
-        iteration = Iteration(self.iterations)
-        counted_iteration = iteration.iterate()
-        results = Results(counted_iteration)
-        results.print_results()
-        sorted_sets = self.sort_the_sets(counted_iteration)
+        iteration = IteratedSet(self.iterations)
+        counted_iteration = iteration.create_counted_set()
+        Results(counted_iteration).print_results()
+        sorter = Sorter(counted_iteration)
+        sorted_sets = sorter.sort_the_sets_by_key()
         make_csv = CsvMake(sorted_sets)
-        this_set = make_csv.sets_to_csv(mode)
-        return this_set
+        make_csv.sets_to_csv(mode)
+        return sorted_sets
+
+
+class Sorter:
+
+    def __init__(self, the_sets):
+        self.the_sets = the_sets
+
+    def sort_the_sets_by_key(self):
+        the_hex_set, the_tri_set, the_bin_set = self.the_sets
+        k_sorted_hex_set = self.k_sort(the_hex_set)
+        k_sorted_tri_set = self.k_sort(the_tri_set)
+        k_sorted_bin_set = self.k_sort(the_bin_set)
+        return k_sorted_hex_set, k_sorted_tri_set, k_sorted_bin_set
 
     @staticmethod
     def k_sort(d):
         return {k: d[k] for k in sorted(d.keys())}
-
-    @classmethod
-    def sort_the_sets(cls, the_sets):
-        the_hex_set, the_tri_set, the_bin_set = the_sets
-        k_sorted_hex_set = cls.k_sort(the_hex_set)
-        k_sorted_tri_set = cls.k_sort(the_tri_set)
-        k_sorted_bin_set = cls.k_sort(the_bin_set)
-        return k_sorted_hex_set, k_sorted_tri_set, k_sorted_bin_set
 
 
 experiment = PyChing(iterations=4096, sets=8)

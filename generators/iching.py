@@ -3,12 +3,7 @@ from dictionaries import finder
 import secrets
 
 
-class Iteration:
-
-    def __init__(self, iterations):
-        self.iterations = iterations
-
-    table = sorted([[a, b] for a in range(1, 9) for b in range(1, 9)], reverse=True)
+class Hexagram:
 
     @staticmethod
     def trigram():
@@ -28,12 +23,20 @@ class Iteration:
             hexagram_array.append(cls.trigram())
         return hexagram_array
 
-    def iterate(self):
+
+class IteratedSet:
+
+    def __init__(self, iterations):
+        self.iterations = iterations
+
+    table = sorted([[a, b] for a in range(1, 9) for b in range(1, 9)], reverse=True)
+
+    def create_counted_set(self):
         all_hex = []
         all_tri = []
         all_bin = []
         for i in range(self.iterations):
-            new_hex = self.create_hexagram()
+            new_hex = Hexagram.create_hexagram()
             low_bins, up_bins = new_hex
             for low_bin in low_bins:
                 all_bin.append(low_bin)

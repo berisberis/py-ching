@@ -1,7 +1,7 @@
-from generator.helpers.terminal import Results
-from generator.helpers.files import CsvMake
+from iching.helpers.terminal import Results
+from iching.helpers.files import CsvMake
 from collections import Counter
-from generator.dictionaries import finder
+from iching.dictionaries import finder
 import secrets
 
 

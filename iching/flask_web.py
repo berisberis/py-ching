@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from generator.iching import PyChing
+from iching.generator import PyChing
 import pygal
 
 bp = Blueprint('web', __name__, url_prefix='/web')

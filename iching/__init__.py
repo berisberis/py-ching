@@ -24,7 +24,7 @@ def create_app(test_config=None):
         return f'Try ths instead: <a href="/web/4096/1" target="_blank">click here</a>'
 
     # apply the blueprints to the app
-    from generator import flask_api, flask_web
+    from iching import flask_api, flask_web
     app.register_blueprint(flask_api.bp)
     app.register_blueprint(flask_web.bp)
 

@@ -1,4 +1,4 @@
-from generator.dictionaries import finder
+from iching.dictionaries import finder
 
 
 class Results:

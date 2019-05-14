@@ -11,15 +11,14 @@ class PyChing:
         self.iterations = iterations
         self.sets = sets
 
-    all_the_sets = []
-
     def run(self):
+        all_the_sets = []
         one_set = self.create_set('w')
-        self.all_the_sets.append(one_set)
+        all_the_sets.append(one_set)
         for r in range(self.sets-1):
             one_set = self.create_set('a')
-            self.all_the_sets.append(one_set)
-        return self.all_the_sets
+            all_the_sets.append(one_set)
+        return all_the_sets
 
     def create_set(self, mode):
         iteration = IteratedSet(self.iterations)

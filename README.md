@@ -1,7 +1,25 @@
 # Py-Ching
 Random i-ching trigram generator that iterates and graphs results
 
-This project uses the `secrets` python module to achieve maximum randomness, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
+This project uses the `secrets` python module to achieve maximum entropy, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
+
+# Install
+``` 
+$ git clone https://github.com/berisberis/py-ching
+$ cd py-ching
+```
+Create a virtual env and activate it:
+```
+$ python3 -m venv venv
+$ . venv/bin/activate
+```
+#Run
+```
+$ export FLASK_APP=iching
+$ export FLASK_ENV=development
+$ flask run
+```
+Open http://127.0.0.1:5000 in a browser.
 
 # About the I-ching
 The I Ching is the oldest binary system developed by the chinese around 1000-750BC.

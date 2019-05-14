@@ -1,0 +1,14 @@
+.container {
+    width: 95%;
+    height: 800px;
+    margin: auto;
+    padding: 10px;
+}
+#hex_chart {
+    width: 50%;
+    float: left;
+}
+#tri_chart {
+    width: 50%;
+    float: right;
+}

@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<section class="container">
+    <div id="hex_chart">
+       <embed type="image/svg+xml" src= {{ hex_chart|safe }} />
+    </div>
+    <div id="tri_chart">
+       <embed type="image/svg+xml" src= {{ tri_chart|safe }} />
+    </div>
+</section>

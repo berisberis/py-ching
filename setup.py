@@ -8,7 +8,7 @@ with io.open("README.md", "rt", encoding="utf8") as f:
 
 setup(
     name='iching',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/berisberis/py-ching',
     license='MIT',
     maintainer='berisberis',

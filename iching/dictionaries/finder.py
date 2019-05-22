@@ -1,13 +1,13 @@
 def find_trigram_number(trigram_bin):
     trigrams = {
-        (0, 0, 0): 8,
-        (0, 0, 1): 7,
-        (0, 1, 0): 6,
-        (0, 1, 1): 5,
+        (0, 0, 0): 0,
+        (0, 0, 1): 1,
+        (0, 1, 0): 2,
+        (0, 1, 1): 3,
         (1, 0, 0): 4,
-        (1, 0, 1): 3,
-        (1, 1, 0): 2,
-        (1, 1, 1): 1
+        (1, 0, 1): 5,
+        (1, 1, 0): 6,
+        (1, 1, 1): 7
     }
     trigram_number = trigrams[trigram_bin]
     return trigram_number
@@ -15,14 +15,14 @@ def find_trigram_number(trigram_bin):
 
 def find_trigram_meaning(number):
     meanings = {
-        1: "☰ Heaven",
-        2: "☱ Lake",
-        3: "☲ Fire",
+        0: "☷ Earth",
+        1: "☶ Mountain",
+        2: "☵ Water",
+        3: "☴ Wind",
         4: "☳ Thunder",
-        5: "☴ Wind",
-        6: "☵ Water",
-        7: "☶ Mountain",
-        8: "☷ Earth"
+        5: "☲ Fire",
+        6: "☱ Lake",
+        7: "☰ Heaven",
     }
     trigram_meaning = meanings[number]
     return trigram_meaning
@@ -30,14 +30,14 @@ def find_trigram_meaning(number):
 
 def trigram_color(number):
     trigram_colors = {
-        1: 'white',
-        2: 'yellow',
-        3: 'magenta',
+        0: 'grey',
+        1: 'blue',
+        2: 'green',
+        3: 'cyan',
         4: 'red',
-        5: 'cyan',
-        6: 'green',
-        7: 'blue',
-        8: 'grey'
+        5: 'magenta',
+        6: 'yellow',
+        7: 'white',
     }
     color_is = trigram_colors[number]
     return color_is

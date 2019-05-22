@@ -74,7 +74,7 @@ class IteratedSet:
     def __init__(self, iterations):
         self.iterations = iterations
 
-    fu_xi_table = sorted([(a, b) for a in range(1, 9) for b in range(1, 9)], reverse=True)
+    fu_xi_table = [(low, high) for low in range(8) for high in range(8)]
 
     def create_counted_set(self):
         all_hex = []

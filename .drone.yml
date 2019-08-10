@@ -8,7 +8,11 @@ steps:
 - name: build
   image: python:3.6-alpine3.9
   commands:
-  - pip install -r requirements.txt
+  # - pip install -r requirements.txt
+  - python3 -m venv venv
+  - . venv/bin/activate
+  - export FLASK_APP=iching
+  - export FLASK_ENV=development
 
 - name: test
   image: python:3.6-alpine3.9

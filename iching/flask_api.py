@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse
-from iching.generator import PyChing
+from iching.hex_generator import PyChing
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 api = Api(bp)

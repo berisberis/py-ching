@@ -1,12 +1,16 @@
 kind: pipeline
-name: default
+name: I-Ching
 
 platform:
   arch: amd64
 
 steps:
-- name: test
-  image: python
+- name: build
+  image: python:3.6-alpine3.9
   commands:
   - pip install -r requirements.txt
-  - echo 'Hello Python'
+
+- name: test
+  image: python:3.6-alpine3.9
+  commands:
+  - python3 -m unittest discover -v

@@ -1,0 +1,12 @@
+kind: pipeline
+name: default
+
+platform:
+  arch: amd64
+
+steps:
+- name: test
+  image: python
+  commands:
+  - pip install -r requirements.txt
+  - echo 'Hello Python'

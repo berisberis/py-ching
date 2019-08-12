@@ -9,9 +9,9 @@ RUN apk upgrade --update && apk --no-cache add \
     bash nano
 
 # Cleanup
-RUN rm -rf /var/cache/apk/* \
-    && find / -type f -iname \*.apk-new -delete \
-    && rm -rf /var/cache/apk/*
+#RUN rm -rf /var/cache/apk/* \
+#    && find / -type f -iname \*.apk-new -delete \
+#    && rm -rf /var/cache/apk/*
 
 ADD ./entrypoint.sh /opt/entrypoint.sh
 RUN chmod +x /opt/entrypoint.sh

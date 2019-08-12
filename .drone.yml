@@ -5,16 +5,26 @@ platform:
   arch: amd64
 
 steps:
-- name: build
-  image: tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
+
+- name: build-and-test
+  image: python:3.6-alpine3.7
   commands:
-  - python3 -m venv appvenv
-  - . appvenv/bin/activate
   - pip install -r requirements.txt
   - export FLASK_APP=iching
   - export FLASK_ENV=development
-
-- name: test
-  image: tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
-  commands:
   - python3 -m unittest discover -v
+
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: quay.io/repository/berisberis/py-ching
+    registry: quay.io
+    tags:
+      - latest
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+  when:
+    branch:
+      - develop

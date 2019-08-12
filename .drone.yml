@@ -17,7 +17,7 @@ steps:
 - name: publish
   image: plugins/docker
   settings:
-    repo: quay.io/repository/berisberis/py-ching
+    repo: quay.io/berisberis/py-ching
     registry: quay.io
     tags:
       - latest

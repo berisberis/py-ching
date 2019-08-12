@@ -1,12 +1,20 @@
 kind: pipeline
-name: default
+name: I-Ching
 
 platform:
   arch: amd64
 
 steps:
-- name: test
-  image: python
+- name: build
+  image: tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
   commands:
+  - python3 -m venv appvenv
+  - . appvenv/bin/activate
   - pip install -r requirements.txt
-  - echo 'Hello Python'
+  - export FLASK_APP=iching
+  - export FLASK_ENV=development
+
+- name: test
+  image: tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
+  commands:
+  - python3 -m unittest discover -v

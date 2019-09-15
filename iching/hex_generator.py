@@ -1,5 +1,3 @@
-from iching.helpers.terminal import Results
-from iching.helpers.files import CsvMake
 from collections import Counter
 from iching.dictionaries import finder
 import secrets
@@ -13,22 +11,23 @@ class PyChing:
 
     def run(self):
         all_the_sets = []
-        one_set = self.create_set('w')
-        all_the_sets.append(one_set)
+        meanings = []
+        one_set = self.create_set()
+        all_the_sets.append(one_set[0])
+        meanings.append(one_set[1])
         for r in range(self.sets-1):
-            one_set = self.create_set('a')
-            all_the_sets.append(one_set)
-        return all_the_sets
+            one_set = self.create_set()
+            all_the_sets.append(one_set[0])
+            meanings.append(one_set[1])
+        return all_the_sets, meanings
 
-    def create_set(self, mode):
+    def create_set(self):
         iteration = IteratedSet(self.iterations)
         counted_iteration = iteration.create_counted_set()
-        Results(counted_iteration).print_results()
+        meaning = Meaning(counted_iteration).hex_meaning()
         sorter = Sorter(counted_iteration)
         sorted_sets = sorter.sort_the_sets_by_key()
-        make_csv = CsvMake(sorted_sets)
-        make_csv.sets_to_csv(mode)
-        return sorted_sets
+        return sorted_sets, meaning
 
 
 class Sorter:
@@ -98,3 +97,15 @@ class IteratedSet:
         counted_tri = Counter(all_tri)
         counted_bin = Counter(all_bin)
         return counted_hex, counted_tri, counted_bin
+
+
+class Meaning:
+    def __init__(self, counted_sets):
+        self.counted_sets = counted_sets
+
+    def hex_meaning(self):
+        counted_hex = self.counted_sets[0]
+        (hex_first_place) = counted_hex.most_common(1)
+        king_wen_first_place = finder.transform_king_wen(hex_first_place[0][0])
+        king_wen_meaning = finder.find_king_wen_meaning(king_wen_first_place)
+        return king_wen_first_place, king_wen_meaning

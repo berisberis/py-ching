@@ -12,7 +12,7 @@ class ApiRoot(Resource):
     def get(self, iterations, sets):
         experiment = PyChing(iterations=iterations, sets=sets)
         results = experiment.run()
-        return results
+        return results[0]
 
 
 api.add_resource(ApiRoot, '/<int:iterations>/<int:sets>')

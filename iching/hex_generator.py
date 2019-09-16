@@ -12,10 +12,8 @@ class PyChing:
     def run(self):
         all_the_sets = []
         meanings = []
-        one_set = self.create_set()
-        all_the_sets.append(one_set[0])
-        meanings.append(one_set[1])
-        for r in range(self.sets-1):
+
+        for r in range(self.sets):
             one_set = self.create_set()
             all_the_sets.append(one_set[0])
             meanings.append(one_set[1])
@@ -108,4 +106,5 @@ class Meaning:
         (hex_first_place) = counted_hex.most_common(1)
         king_wen_first_place = finder.transform_king_wen(hex_first_place[0][0])
         king_wen_meaning = finder.find_king_wen_meaning(king_wen_first_place)
-        return king_wen_first_place, king_wen_meaning
+        message = finder.secondary_meaning(king_wen_first_place)
+        return king_wen_first_place, king_wen_meaning, message

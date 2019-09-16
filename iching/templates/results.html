@@ -6,9 +6,16 @@
     <div id="tri_chart">
         <embed type="image/svg+xml" src= {{ tri_chart|safe }} />
     </div>
+
     {% for meaning in meanings %}
     <div id="number">
-        <h1> {{ meaning[0] }} - {{ meaning[1] }} </h1>
+        <h1> {{ meaning[0] }} - {{ meaning[1] }} <br> {{ meaning[2] }}</h1>
+    </div>
+    {% endfor %}
+
+    {% for bin_value in bin_count %}
+    <div id="bin_count">
+        <h1>NO: {{ bin_value[0] }} / Yes: {{ bin_value[1] }} </h1>
     </div>
     {% endfor %}
 </section>

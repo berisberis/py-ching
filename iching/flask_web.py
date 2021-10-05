@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from iching.generator import PyChing
+from iching.hex_generator import PyChing
 import pygal
 
 bp = Blueprint('web', __name__, url_prefix='/web')
@@ -9,21 +9,33 @@ bp = Blueprint('web', __name__, url_prefix='/web')
 def web_root(iterations, sets):
     experiment = PyChing(iterations=iterations, sets=sets)
     results = experiment.run()
+    results_data = results[0]
 
-    hex_keys = list(results[0][0].keys())
+    hex_keys = results_data[0][0].keys()
     hex_chart = pygal.Line()
     hex_chart.x_labels = hex_keys
-    for each_set in results:
-        hex_values = each_set[0].values()
-        hex_chart.add(f'Set #{results.index(each_set)}', hex_values)
+    for one_set in results_data:
+        hex_values = one_set[0].values()
+        hex_chart.add(f'Set #{results_data.index(one_set)}', hex_values)
     hex_chart = hex_chart.render_data_uri()
 
-    tri_keys = list(results[0][1].keys())
+    tri_keys = results_data[0][1].keys()
     tri_chart = pygal.Line()
     tri_chart.x_labels = tri_keys
-    for each_set in results:
-        tri_values = each_set[1].values()
-        tri_chart.add(f'Set #{results.index(each_set)}', tri_values)
+    for one_set in results_data:
+        tri_values = one_set[1].values()
+        tri_chart.add(f'Set #{results_data.index(one_set)}', tri_values)
     tri_chart = tri_chart.render_data_uri()
 
-    return render_template('results.html', hex_chart=hex_chart, tri_chart=tri_chart)
+    bin_count = []
+    for one_set in results_data:
+        bin_count.append(one_set[2])
+
+    meanings = results[1]
+
+    return render_template('results.html',
+                           hex_chart=hex_chart,
+                           tri_chart=tri_chart,
+                           bin_count=bin_count,
+                           meanings=meanings
+                           )

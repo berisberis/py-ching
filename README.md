@@ -1,19 +1,28 @@
 # Py-Ching
-Random i-ching trigram generator that iterates and graphs results
 
-This project uses the `secrets` python module to achieve maximum entropy, although the algorithm could be changed to `random` to test and prove with the results if patterns emerge (which is a sign of false randomness)
+## Random i-ching trigram generator that iterates and graphs results
 
-# Install
+---
+# Run with Docker
+
+```
+docker run -p 80:80 quay.io/berisberis/py-ching 
+```
+go to http://localhost/web/4096/1
+
+or to http://localhost/api/4096/1 for an api version.
+
+# Develop
 ``` 
 $ git clone https://github.com/berisberis/py-ching
 $ cd py-ching
 ```
-Create a virtual env and activate it:
+## Create a virtual env and activate it:
 ```
 $ python3 -m venv venv
 $ . venv/bin/activate
 ```
-# Run
+## Run
 ```
 $ export FLASK_APP=iching
 $ export FLASK_ENV=development
